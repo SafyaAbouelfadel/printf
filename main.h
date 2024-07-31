@@ -18,37 +18,41 @@
 #define NULL_STRING "(null)"
 
 #define PARAMS_INIT {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
+
 /**
- * struct parameters - Holds formatting options
+ * struct parameter - Holds formatting options
  *
  * @unsign: Flag for unsigned values
- * @plusFlag: Flag for plus sign
- * @spaceFlag: Flag for space
- * @hashtagFlag: Flag for hashtag
- * @zeroFlag: Flag for zero padding
- * @minusFlag: Flag for left alignment
- *
+ * @left_align: Flag for left alignment
+ * @zero_pad: Flag for zero padding
+ * @alternate_form: Flag for alternate form
+ * @force_sign: Flag for force sign
+ * @space_flag: Flag for space
  * @width: Field width
  * @precision: Field precision
- *
- * @hModifier: Flag for 'h' modifier
- * @lModifier: Flag for 'l' modifier
+ * @short_modif: Flag for short modifier
+ * @long_modif: Flag for long modifier
  */
 
-typedef struct {
-    bool unsign;    /* u specifier */
-    bool left_align;    /* '-' flag*/
-    bool zero_pad;  /* '0' flag */
-    bool alternate_form;    /* # flag */
-    bool force_sign;    /* + flag */
-    bool space_flag;    /* ' ' flag */
-    unsigned int width;
-    unsigned int precision;
-    unsigned int short_modif;
-    unsigned int long_modif;
+typedef struct parameter
+{
+	bool unsign;    /* u specifier */
+	bool left_align;    /* '-' flag*/
+	bool zero_pad;  /* '0' flag */
+	bool alternate_form;    /* # flag */
+	bool force_sign;    /* + flag */
+	bool space_flag;    /* ' ' flag */
+	unsigned int width;
+	unsigned int precision;
+	unsigned int short_modif;
+	unsigned int long_modif;
 } parameter_t;
 
-/* structure specifier */
+/**
+ * struct specifier - Holds specifier and function pointer
+ * @specifier: The format specifier
+ * @f: The function pointer to handle the specifier
+ */
 
 typedef struct specifier
 {
@@ -65,7 +69,6 @@ int output_unsigned_int(va_list args, parameter_t *params);
 int format_address(va_list args, parameter_t *params);
 
 /* print_digit */
-int str_length(int num);
 int format_number(char *string, parameter_t *params);
 int _string_length(char *c);
 int format_number_shifted_right(char *string, parameter_t *params);
@@ -90,7 +93,7 @@ int *get_flag(char *s, parameter_t *params);
 int get_length_modifiers(char *s, parameter_t *params);
 
 /* function*/
-int output_range(char *begin, char *end, char*expect);
+int output_range(char *begin, char *end, char *expect);
 int output_reverse(va_list ap, parameter_t params);
 int output_rot13(va_list ap, parameter_t params);
 
@@ -100,11 +103,8 @@ int format_HEX(va_list args, parameter_t *params);
 int format_binary(va_list args, parameter_t *params);
 int format_octal_value(va_list args, parameter_t *params);
 
-/* function(need a name)*/ 
+/* fetch_specifier*/
 int (*get_specifier(char *s))(va_list ap, parameter_t *params);
 int fetch_output_function(char *str, va_list arg, parameter_t *params);
-
-/* print*/
-int print_char(va_list *str, parameter_t *params);
 
 #endif /* MAIN_H */
