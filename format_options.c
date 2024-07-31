@@ -49,7 +49,7 @@ char *get_precision(char *s, parameter_t *params, va_list ap)
 	}
 
 	params->precision = 0;
-	while (_is_digit(*s))
+	while (is_digit(*s))
 	{
 		params->precision = params->precision * 10 + (*s - '0');
 		s++;
@@ -79,17 +79,11 @@ char *get_width(char *s, parameter_t *params, va_list ap)
 	}
 
 	params->width = 0;
-	while (_is_digit(*s))
+	while (is_digit(*s))
 	{
 	params->width = params->width * 10 + (*s - '0');
 	s++;
 	}
-
-	if (params->width < 0)
-	{
-	params->width = -params->width;
-	}
-
 	return (s);
 }
 /**

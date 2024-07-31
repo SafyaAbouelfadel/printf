@@ -51,12 +51,12 @@ int print_unsigned_int(va_list args, parameter_t *params)
 
 	if (params->long_modif)
 		lng = (unsigned long)va_arg(args, unsigned long);
-	else if (params->hModifier)
+	else if (params->short_modif)
 		lng = (unsigned short int)va_arg(args, unsigned int);
 	else
 		lng = (unsigned int)va_arg(args, unsigned int);
 	params->unsign = 1;
-	return (format_number(converter(long, 10, CONVERT_UNSIGNED, params), params));
+	return (format_number(converter(lng, 10, CONVERT_UNSIGNED, params), params));
 }
 /**
  * format_address - prints the address

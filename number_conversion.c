@@ -16,7 +16,7 @@ int output_hex(va_list args, parameter_t *params)
 
 	if (params->long_modif)
 		lng = (unsigned long)va_arg(args, unsigned long);
-	else if (params->hModifier)
+	else if (params->short_modif)
 		lng = (unsigned short int)va_arg(args, unsigned int);
 	else
 		lng = (unsigned int)va_arg(args, unsigned int);
@@ -46,7 +46,7 @@ int output_HEX(va_list args, parameter_t *params)
 
 	if (params->long_modif)
 		lng = (unsigned long)va_arg(args, unsigned long);
-	else if (params->hModifier)
+	else if (params->short_modif)
 		lng = (unsigned short int)va_arg(args, unsigned int);
 	else
 		lng = (unsigned int)va_arg(args, unsigned int);
@@ -95,7 +95,7 @@ int output_octal_value(va_list args, parameter_t *params)
 
 	if (params->long_modif)
 		lng = (unsigned long)va_arg(args, unsigned long);
-	else if (params->hModifier)
+	else if (params->short_modif)
 		lng = (unsigned short int)va_arg(args, unsigned int);
 	else
 		lng = (unsigned int)va_arg(args, unsigned int);

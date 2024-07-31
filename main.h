@@ -46,6 +46,7 @@ typedef struct parameter
 	unsigned int precision;
 	unsigned int short_modif;
 	unsigned int long_modif;
+
 } parameter_t;
 
 /**
@@ -63,20 +64,20 @@ typedef struct specifier
 int _printf(const char *format, ...);
 
 /* numerals*/
-int _is_digit(int num);
 char *converter(long int number, int base, int flags, parameter_t *params);
-int output_unsigned_int(va_list args, parameter_t *params);
+int print_unsigned_int(va_list args, parameter_t *params);
 int format_address(va_list args, parameter_t *params);
 
 /* print_digit */
+int is_digit(int d);
 int format_number(char *string, parameter_t *params);
 int _string_length(char *c);
 int format_number_shifted_right(char *string, parameter_t *params);
 int format_number_shifted_left(char *string, parameter_t *params);
 
 /* output_functions*/
-int output_character(va_list args, parameter_t *params);
-int output_integer(va_list args, parameter_t *params);
+int print_character(va_list args, parameter_t *params);
+int print_integer(va_list args, parameter_t *params);
 int output_string(va_list args, parameter_t *params);
 int output_percentage(va_list args, parameter_t *params);
 int output_S(va_list args, parameter_t *params);
@@ -98,10 +99,10 @@ int output_reverse(va_list ap, parameter_t params);
 int output_rot13(va_list ap, parameter_t params);
 
 /* number_conversion*/
-int format_hex(va_list args, parameter_t *params);
-int format_HEX(va_list args, parameter_t *params);
+int output_hex(va_list args, parameter_t *params);
+int output_HEX(va_list args, parameter_t *params);
 int format_binary(va_list args, parameter_t *params);
-int format_octal_value(va_list args, parameter_t *params);
+int output_octal_value(va_list args, parameter_t *params);
 
 /* fetch_specifier*/
 int (*get_specifier(char *s))(va_list ap, parameter_t *params);

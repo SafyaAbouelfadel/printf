@@ -41,8 +41,9 @@ int output_reverse(va_list ap, parameter_t params)
 
 	while (s[len] != '\0')
 		len++;
+	int i;
 
-	for (int i = len - 1; i >= 0; i--)
+	for (i = len - 1; i >= 0; i--)
 	{
 		count += _putchar(s[i]);
 	}
@@ -62,18 +63,21 @@ int output_rot13(va_list ap, parameter_t params)
 	int i, position, count = 0;
 	char *s = va_arg(ap, char *);
 	(void)params;
-	char ar[] = "NOPQRSTUVWXYZABCDEFGHIJKLM      nopqrstuvwxyzabcdefghijklm";
+	char ar[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
 	for (i = 0; s[i] != '\0'; i++)
 	{
-		if ((s[i] >= 'a' && s[i] <= 'z')
-			|| (s[i] >= 'A' && s[i] <= 'Z'))
+		if ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= 'A' && s[i] <= 'Z'))
 		{
-			position = s[i] - 65;
+			if (s[i] >= 'a' && s[i] <= 'z')
+				position = s[i] - 'a';
+			else
+				position = s[i] - 'A';
+
 			count += _putchar(ar[position]);
 		}
 		else
-			count = _putchar(s[i]);
+			count += _putchar(s[i]);
 	}
 	return (count);
 }

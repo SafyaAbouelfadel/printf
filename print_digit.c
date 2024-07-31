@@ -109,24 +109,28 @@ int format_number_shifted_right(char *string, parameter_t *params)
  */
 int format_number_shifted_left(char *string, parameter_t *params)
 {
-	unsigned int m = 0, ngt, ngt2, u = _string_length(string);
+	unsigned int m = 0, ngt2, u = _string_length(string);
 	char filler_char = ' ';
 
-	if
+	if (params->zero_pad && !params->left_align)
 	{
-		(params->zero_pad && !params->left_align);
 		filler_char = '0';
-		ngt = ngt2 = (!params->width && filler_char == '0' && !params->left_align);
+		ngt2 = (!params->width && filler_char == '0' && !params->left_align);
 		string++;
 	}
 	else
 	{
-		ngt = 0;
+		ngt2 = 0;
 	}
 	if (params->force_sign && !ngt2 && !params->unsign)
-		m += _putchar(' '), u++;
+	{
+		m += _putchar(' ');
+		u++;
+	}
 	m += _puts(string);
 	while (u++ < params->width)
+	{
 		m += _putchar(filler_char);
+	}
 	return (m);
 }
