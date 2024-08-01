@@ -107,6 +107,5 @@ int output_octal_value(va_list args, parameter_t *params);
 /* fetch_specifier*/
 int (*get_specifier(char *s))(va_list ap, parameter_t *params);
 int fetch_output_function(char *str, va_list arg, parameter_t *params);
-char *skip_format_specifier(char *format);
 
 #endif /* MAIN_H */
