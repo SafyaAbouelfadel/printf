@@ -49,46 +49,10 @@ int (*get_specifier(char *s))(va_list ap, parameter_t *params)
  */
 int fetch_output_function(char *str, va_list arg, parameter_t *params)
 {
-	char *next;
 	int (*f)(va_list, parameter_t *) = get_specifier(str);
 
 	if (f)
 		return (f(arg, params));
 
-	next = skip_format_specifier(format);
-
 	return (0);
-}
-
-/**
- * skip_format_specifier - Advances the format string pointer
- *	past the format specifier.
- * @format: Pointer to the current position in the format string.
- *
- * Return: Pointer to the next character.
- */
-char *skip_format_specifier(char *format)
-{
-	char specifiers[] = "cdisbouxXpqS/rR%";
-	char *ptr = format;
-
-	if (ptr == NULL)
-		return (NULL);
-
-	if (*ptr == '%')
-		ptr++;
-
-	while (*ptr)
-	{
-	char *s = specifiers;
-
-	while (*s)
-	{
-		if (*ptr == *s)
-			return (ptr + 1);
-		s++;
-	}
-	ptr++;
-	}
-	return (ptr);
 }
