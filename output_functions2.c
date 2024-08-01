@@ -9,11 +9,11 @@
  * Return: 0 if the output matches the expected result,
  * or a non-zero value otherwise.
  */
-int output_range(char *begin, char *end, char *expect)
+int output_range(const char *begin, const char *end, const char *expect)
 {
-	int i, range;
+	int range = 0;
 
-	for (i = 0; begin <= end; i++)
+	while (begin <= end)
 	{
 		if (begin != expect)
 			range += _putchar(*begin);
@@ -29,9 +29,9 @@ int output_range(char *begin, char *end, char *expect)
  *
  * Return: Number of characters printed
  */
-int output_reverse(va_list ap, parameter_t params)
+int output_reverse(va_list ap, parameter_t *params)
 {
-	int len = 0, count = 0;
+	int i, len = 0, count = 0;
 	char *s = va_arg(ap, char*);
 
 	(void)(params);
@@ -41,7 +41,6 @@ int output_reverse(va_list ap, parameter_t params)
 
 	while (s[len] != '\0')
 		len++;
-	int i;
 
 	for (i = len - 1; i >= 0; i--)
 	{
@@ -58,12 +57,13 @@ int output_reverse(va_list ap, parameter_t params)
  *
  * Return: The number of characters output.
  */
-int output_rot13(va_list ap, parameter_t params)
+int output_rot13(va_list ap, parameter_t *params)
 {
 	int i, position, count = 0;
 	char *s = va_arg(ap, char *);
-	(void)params;
 	char ar[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+
+	(void)params;
 
 	for (i = 0; s[i] != '\0'; i++)
 	{

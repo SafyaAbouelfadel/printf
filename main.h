@@ -90,22 +90,23 @@ int _puts(char *s);
 void initial_params(parameter_t *params, va_list arg);
 char *get_precision(char *s, parameter_t *params, va_list ap);
 char *get_width(char *s, parameter_t *params, va_list ap);
-int *get_flag(char *s, parameter_t *params);
+int get_flag(char *s, parameter_t *params);
 int get_length_modifiers(char *s, parameter_t *params);
 
-/* function*/
-int output_range(char *begin, char *end, char *expect);
-int output_reverse(va_list ap, parameter_t params);
-int output_rot13(va_list ap, parameter_t params);
+/* ouput_function2*/
+int output_range(const char *begin, const char *end, const char *expect);
+int output_reverse(va_list ap, parameter_t *params);
+int output_rot13(va_list ap, parameter_t *params);
 
 /* number_conversion*/
 int output_hex(va_list args, parameter_t *params);
 int output_HEX(va_list args, parameter_t *params);
-int format_binary(va_list args, parameter_t *params);
+int output_binary(va_list args, parameter_t *params);
 int output_octal_value(va_list args, parameter_t *params);
 
 /* fetch_specifier*/
 int (*get_specifier(char *s))(va_list ap, parameter_t *params);
 int fetch_output_function(char *str, va_list arg, parameter_t *params);
+char *skip_format_specifier(char *format);
 
 #endif /* MAIN_H */

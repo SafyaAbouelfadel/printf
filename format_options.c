@@ -94,12 +94,12 @@ char *get_width(char *s, parameter_t *params, va_list ap)
  *
  * Return: Pointer to an integer representing the parsed flags.
  */
-int *get_flag(char *s, parameter_t *params)
+int get_flag(char *s, parameter_t *params)
 {
 	int flag_set = 0;
 
 	if (s == NULL || params == NULL)
-		return (s);/* handle if s is NULL*/
+		return (0);/* handle if s is NULL*/
 	while (*s == '-' || *s == '0' || *s == '#' || *s == '+' || *s == ' ')
 	{
 	if (*s == '-')
