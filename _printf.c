@@ -3,46 +3,44 @@
 /**
  * _printf - Custom printf function
  * @format: format string
- *
  * Return: number of characters printed
  */
 int _printf(const char *format, ...)
 {
-	unsigned int idx = 0, length = 0;
-	const char *start;
+	unsigned int idx, length = 0;
+	const char *p, *start;
 	va_list arg_list;
 	parameter_t params;
 
 	if (!format || (format[0] == '%' && !format[1]) ||
 		(format[0] == '%' && format[1] == ' ' && !format[2]))
-	return (-1);
-
+			return (-1);
 	va_start(arg_list, format);
-	while (format[idx])
+	for (idx = 0; format[idx]; idx++)
 	{
-		initial_params(&params, arg_list);
+	initial_params(&params, arg_list);
 
 	if (format[idx] != '%')
 	{
-		length += _putchar(format[idx++]);
+	length += _putchar(format[idx]);
 		continue;
 	}
-	start = &format[idx++];
-	while (get_flag((char *)format + idx, &params))
-		idx++;
+	p = &format[idx];
+	start = p;
+	p++;
+	while (get_flag((char *)p, &params))
+		p++;
+	p = get_width((char *)p, &params, arg_list);
+	p = get_precision((char *)p, &params, arg_list);
 
-	idx = get_width((char *)format + idx, &params, arg_list) - format;
-	idx = get_precision((char *)format + idx, &params, arg_list) - format;
-
-	if (get_length_modifiers((char *)format + idx, &params))
-		idx++;
-	if (!get_specifier((char *)format + idx))
-		length += output_range(start, &format[idx], params.long_modif ||
-			params.short_modif ? &format[idx] + 1 : 0);
+	if (get_length_modifiers((char *)p, &params))
+		p++;
+	if (!get_specifier((char *)p))
+		length += output_range(start, p, params.long_modif ||
+		params.short_modif ? p + 1 : 0);
 	else
-		length += fetch_output_function((char *)format + idx, arg_list, &params);
-
-	idx += &format[idx] - (format + idx);
+		length += fetch_output_function((char *)p, arg_list, &params);
+	idx = p - format;
 	}
 
 	_putchar(DATA_CLEAR);
